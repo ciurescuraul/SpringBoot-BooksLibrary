@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header">Head</div>
+<body>
+<div class="main">
+    <div th:replace="fragments/nav">Navigation</div>
+
+    <!-- Main Content -->
+    <main role="main">
+        <div class="container p-5">
+            <div>
+                <a class="btn btn-success btn-block" th:href="@{/authors/add}" href="#" role="button">Add
+                    Author</a>
+            </div>
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}" href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Authors</li>
+                </ol>
+            </nav>
+
+            <table class="table">
+
+
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Authors</th>
+                    <th scope="col">No. of Books</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="author, iterStat : ${authors}">
+                    <td th:text="${iterStat.count}">123</td>
+                    <td th:text="${author.firstName} + ' ' + ${author.lastName}">Author Firstname</td>
+                    <td th:each="b, no : ${author.books}"><a href="#"  th:text="${no.count}">No of books</a></td>
+                </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+    </main>
+    <!-- Finish Main Content -->
+
+    <div th:replace="fragments/footer">Footer</div>
+</div>
+<div th:replace="fragments/scripts">Scripts</div>
+</body>
+</html>

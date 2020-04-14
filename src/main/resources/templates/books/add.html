@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header">Head</div>
+<body>
+<div class="main">
+    <div th:replace="fragments/nav">Navigation</div>
+
+    <!-- Main Content -->
+    <main role="main">
+        <div class="container p-5">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/books/all}" href="#">Books</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Book</li>
+                </ol>
+            </nav>
+
+            <!-- Add a book -->
+            <form action="#" th:action="@{/books/add}"  th:object="${book}" method="post">
+
+                <div class="form-group">
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" class="form-control" id="bookTitle" th:field="*{title}" />
+                </div>
+                <div class="form-group">
+                    <label for="bookIsbn">Book Isbn</label>
+                    <input type="text" class="form-control" id="bookIsbn" th:field="*{isbn}" />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+
+            </form>
+
+        </div>
+    </main>
+    <!-- Finish Main Content -->
+
+    <div th:replace="fragments/footer">Footer</div>
+</div>
+<div th:replace="fragments/scripts">Scripts</div>
+</body>
+</html>

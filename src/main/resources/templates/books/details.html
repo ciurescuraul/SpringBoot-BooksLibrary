@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header">Head</div>
+<body>
+<div class="main">
+    <div th:replace="fragments/nav">Navigation</div>
+
+    <!-- Main Content -->
+    <main role="main">
+        <div class="container p-5">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/books}" href="#">Books</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" th:text="${book.title} + ' details: '">Book Details</li>
+                </ol>
+            </nav>
+            <!-- Book details -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" th:text="${book.title}">Book Title</h3>
+                    <p class="card-text" th:text="'Publisher: ' + ${book.publisher.name}">Book Publisher</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h5 th:text="'ISBN: ' + ${book.isbn}">ISBN</h5></li>
+                    <li class="list-group-item" th:each="a : ${book.authors}"><h5
+                            th:text="'Author: ' + ${a.firstName} + ' ' + ${a.lastName}">Firstname</h5></li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Edit</a>
+                    <a href="#" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Finish Main Content -->
+
+    <div th:replace="fragments/footer">Footer</div>
+</div>
+<div th:replace="fragments/scripts">Scripts</div>
+</body>
+</html>

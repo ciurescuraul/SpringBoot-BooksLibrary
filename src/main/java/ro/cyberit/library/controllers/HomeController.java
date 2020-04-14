@@ -1,4 +1,4 @@
-package ro.cyberit.library.controller;
+package ro.cyberit.library.controllers;
 
 
 import org.slf4j.Logger;

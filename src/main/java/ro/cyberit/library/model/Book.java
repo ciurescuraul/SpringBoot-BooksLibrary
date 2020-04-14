@@ -1,24 +1,42 @@
 package ro.cyberit.library.model;
 
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
 public class Book {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String title;
-    private Long isbn;
-    private String genre;
-    private String description;
-    private Double price;
 
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", isbn=" + isbn +
-                ", genre='" + genre + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                '}';
+    private String title;
+    private String isbn;
+
+    @ManyToOne
+    private Publisher publisher;
+
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "books"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
+    private Set<Author> authors = new HashSet<>();
+
+    public Book() {
+    }
+
+    public Book(String title, String isbn) {
+        this.title = title;
+        this.isbn = isbn;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     public Long getId() {
@@ -37,35 +55,43 @@ public class Book {
         this.title = title;
     }
 
-    public Long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public String getGenre() {
-        return genre;
+    public Set<Author> getAuthors() {
+        return authors;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setAuthors(Set<Author> authors) {
+        this.authors = authors;
     }
 
-    public String getDescription() {
-        return description;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        return Objects.equals(id, book.id);
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
     }
 }
