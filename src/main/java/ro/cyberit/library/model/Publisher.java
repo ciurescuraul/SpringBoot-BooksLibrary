@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Publisher")
+@Table(name = "publisher")
 public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,12 +25,13 @@ public class Publisher {
     public Publisher() {
     }
 
-    public Publisher(String name, String address, String city, String state, Integer zip) {
+    public Publisher(String name, String addressLine1, String city, String state, Integer zip, Set<Book> books) {
         this.name = name;
-        this.addressLine1 = address;
+        this.addressLine1 = addressLine1;
         this.city = city;
         this.state = state;
         this.zip = zip;
+        this.books = books;
     }
 
     public Set<Book> getBooks() {

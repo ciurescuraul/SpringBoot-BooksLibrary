@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+@Entity(name = "Book")
+@Table(name = "book")
 public class Book {
 
     @Id
@@ -15,7 +16,7 @@ public class Book {
     private String title;
     private String isbn;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Publisher publisher;
 
     @ManyToMany
