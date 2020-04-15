@@ -28,20 +28,21 @@
                     <th scope="col">City</th>
                     <th scope="col">State</th>
                     <th scope="col">ZipCode</th>
-                    <th scope="col">Publisher's Books</th>
+<!--                    <th scope="col">Publisher's Books</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="publisher, iterStat : ${publishers}">
                     <td th:text="${iterStat.count}">123</td>
                     <td th:text="${publisher.id}">123</td>
-                    <td th:text="${publisher.name}">Name</td>
+                    <td><a href="#" th:href="@{/publisher/details/{id}(id=${publisher.id})}" th:text="${publisher.name}">Name</a></td>
                     <td th:text="${publisher.addressLine1}">Address</td>
                     <td th:text="${publisher.city}">City</td>
                     <td th:text="${publisher.state}">State</td>
                     <td th:text="${publisher.zip}">ZipCode</td>
-                    <td th:each="b : ${publisher.books}"><a href="#" th:href="@{/books/details/{id}(id=${b.id})}"
-                                                            th:text="${b.title}">No of Books</a></td>
+<!--                    <td th:each="b : ${publisher.books}">-->
+<!--                        <a href="#" th:href="@{/books/details/{id}(id=${b.id})}" th:text="${b.title}">Book Title</a>-->
+<!--                    </td>-->
                 </tr>
                 </tbody>
             </table>

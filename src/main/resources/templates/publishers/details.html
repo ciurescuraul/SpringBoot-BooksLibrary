@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/header">Head</div>
+<body>
+<div class="main">
+    <div th:replace="fragments/nav">Navigation</div>
+
+    <!-- Main Content -->
+    <main role="main">
+        <div class="container p-5">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a th:href="@{/}" href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/publishers}" href="#">Publishers</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" th:text="${publisher.name} + ' details: '">
+                        Publisher Details
+                    </li>
+                </ol>
+            </nav>
+            <!-- Book details -->
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title" th:text="${publisher.name}">Book Title</h3>
+                    <p class="card-text" th:text="'Address: ' + ${publisher.addressLine1}">Publisher Address</p>
+                    <p class="card-text" th:text="'City: ' + ${publisher.city}">Publisher City</p>
+                    <p class="card-text" th:text="'State: ' + ${publisher.state}">Publisher State</p>
+                    <p class="card-text" th:text="'ZipCode: ' + ${publisher.zip}">Publisher ZipCode</p>
+                </div >
+                <div class="card-body"> <h2 th:text="${publisher.name} + '\'s books: '">Publisher's books</h2>
+                    <ul class="list-group list-group-flush" th:each="pb : ${publisher.books}">
+                        <li class="list-group-item">
+                            <a href="#" th:href="@{/books/details/{id}(id=${pb.id})}" th:text="${pb.title}">Publisher's book</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <a href="#" class="card-link">Edit</a>
+                    <a href="#" class="card-link">Delete</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Finish Main Content -->
+
+    <div th:replace="fragments/footer">Footer</div>
+</div>
+<div th:replace="fragments/scripts">Scripts</div>
+</body>
+</html>
