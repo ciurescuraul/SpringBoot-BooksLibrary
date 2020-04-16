@@ -35,8 +35,8 @@
                     </ul>
                 </div>
                 <div class="card-body">
-                    <a href="#" class="card-link">Edit</a>
-                    <a href="#" class="card-link">Delete</a>
+                    <a href="#" th:href="@{/publisher/edit/{id}(id=${publisher.id})}" class="card-link">Edit</a>
+                    <a href="#" th:href="@{/publisher/delete/{id}(id=${publisher.id})}" class="card-link">Delete</a>
                 </div>
             </div>
         </div>
